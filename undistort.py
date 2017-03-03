@@ -48,7 +48,7 @@ ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img_siz
 dist_pickle = {}
 dist_pickle["mtx"] = mtx
 dist_pickle["dist"] = dist
-pickle.dump( dist_pickle, open(os.path.join(curfile,"image_distortion_matrices.p"), "wb"))
+pickle.dump( dist_pickle, open(os.path.join(srcfile,"image_distortion_matrices.p"), "wb"))
 
 # Visualize Distortion
 rand_index = np.random.randint(len(imagePaths))
