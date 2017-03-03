@@ -124,7 +124,7 @@ def process_image(img):
     
     return result
 
-input_video = 'project_video.mp4'
+input_video = 'harder_challenge_video.mp4'
 output_filename = input_video.split('.mp4')[0] + '_tracked.mp4'
 output_video = os.path.join(outfolder,output_filename)
 

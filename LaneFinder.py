@@ -35,6 +35,16 @@ for idx,path in enumerate(imagePaths):
     img = cv2.imread(path)
     # Undistort Image
     undistort_img = calibMats.undistort(img)
+    # Saving undistorted and distorted images
+    f, (ax1, ax2) = plt.subplots(1, 2, figsize=(20,10))
+    img_RGB = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    ax1.imshow(img_RGB)
+    ax1.set_title('Distorted Image', fontsize=20)
+    undistorted_img_RGB = cv2.cvtColor(undistort_img,cv2.COLOR_BGR2RGB)
+    ax2.imshow(undistorted_img_RGB)
+    ax2.set_title('Undistorted image after Camera calibration', fontsize=20)
+    undistort_outfile = os.path.join(outfolder,'undistorted_'+str(idx)+'.jpg')
+    plt.savefig(undistort_outfile)
     # Thresholding
     color_binary = Color_thresholding(undistort_img,(100,255),(35,255))
     grad_x = Sobel_abs_thresholding(undistort_img,orient='x', kernel = 3, thresh=(40,255))
