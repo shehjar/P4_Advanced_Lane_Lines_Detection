@@ -127,9 +127,9 @@ the y values are taken as per the window height dimension and the x values are t
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+The resulting image from adding colours in the detected lane areas needs to be inverse warped so that it can be put on the original undistorted image. The inverse warping is also done via the class `pTransform` through the function `invWarped()`. Eventually, the lane markings and the road are coloured in the final image, as shown below
 
-![alt text][image6]
+![Final Output][image6]
 
 ---
 
@@ -137,7 +137,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_videos/project_video_tracked.mp4)
 
 ---
 
@@ -145,4 +145,6 @@ Here's a [link to my video result](./project_video.mp4)
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The perspective transform implementation took a bit of time, as I had initially tried to make it robust by first calculating the vanishing point. However, I was unable to get the other source points in this case and therefore later resorted to manual entry of such points which may differ from image to image. The next challenge was getting the lane markings identified properly. This also depended on the kind of thresholding done previously and the bird's eye view of the road, which is again parameter dependent, which was done manually. The final image was being skewed due to the presence of a nearby car. I tried to crop the part of the car by changing the destination points in the perspective transform, to make it work. Also the calculation of the radius of curvature is done through mapped parameters like pixels per meter, which can also be inaccurate.
+
+The pipeline that I created did well for the project video, but did not fare well with the challenge videos as the perspective transformation of the image needs more robustness.
